@@ -16,7 +16,8 @@ namespace WebAutomation.PageObjects
         public IWebElement FormSearch => WebDriver.FindElement(By.XPath("//input[@placeholder='Search']"));
         public IWebElement AmountToTransferTextField => WebDriver.FindElement(By.XPath("//input[@data-monitoring-label='Transfer Form Amount']"));
         public IWebElement TransferButton => WebDriver.FindElement(By.XPath("//button//span[text()='Transfer']"));
-        
+        public IWebElement TransferSuccessfulMessage => WebDriver.FindElement(By.XPath("//span[text()='Transfer successful']"));
+
 
         public PayOrTransferDialog(IWebDriver driver) : base(driver)
         {
@@ -54,7 +55,7 @@ namespace WebAutomation.PageObjects
             return isFormAccountFromChooser && isFormAccountToChooser;
         }
 
-        public void TranferMoney(string fromAccount, string toAccount, int amount)
+        public void TranferMoney(string fromAccount, string toAccount, double amount)
         {
             FormAccountFromChooser.Click();
             FormSearch.SendKeys(fromAccount);
@@ -87,6 +88,28 @@ namespace WebAutomation.PageObjects
 
             TransferButton.Click();
 
+        }
+
+        public double GetAccountBalance(string account)
+        {
+            var element = WebDriver.FindElement(By.XPath($"//div[@class='account-info']//h3[normalize-space()='{account}']/ancestor::div[@class='account-info']/span[@class='account-balance']"));
+            return Convert.ToDouble( element.Text);
+        }
+
+        public bool DidTransferSuccessfulMessageAppear()
+        {
+            return Wait
+            .Until(condition =>
+            {
+                try
+                {
+                    return TransferSuccessfulMessage.Displayed;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            });
         }
     }
 }

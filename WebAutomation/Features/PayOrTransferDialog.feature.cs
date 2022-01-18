@@ -113,7 +113,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Then("I should see that successful message is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 9
- testRunner.And("the current balance of Everyday account to Bills account is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the current balance of Everyday account and Bills account is correct", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

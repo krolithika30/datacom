@@ -6,4 +6,4 @@ Scenario: User should be able to transfer money from Everyday account to Bills a
 	When I access the pay or transfer dialog
 	And I transfer $500  from Everyday account to Bills account
 	Then I should see that successful message is displayed
-	And the current balance of Everyday account to Bills account is correct
+	And the current balance of Everyday account and Bills account is correct
