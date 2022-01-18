@@ -119,6 +119,7 @@
     <None Include="Features\PayeesPage.feature" />
     <None Include="Features\PayOrTransferDialog.feature" />
     <None Include="packages.config" />
+    <None Include="PostManApiTestAutomation\Datacom.postman_collection.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

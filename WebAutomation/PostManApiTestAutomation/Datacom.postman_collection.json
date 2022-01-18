@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "8fa9d08f-3c78-4b7d-a54d-6804040f46a5",
+		"name": "Datacom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUsers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"userCount\", 10);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var userCount = pm.globals.get(\"userCount\");\r",
+							"\r",
+							"pm.test(\"There are \"+userCount, function(){\r",
+							"    const users = pm.response.json();\r",
+							"    pm.expect(users.length).to.eql(userCount)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"userId\",8);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.globals.set(\"userCount\", 10);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User is Nicholas Runolfsdottir V\", function () {\r",
+							"    const name = pm.response.json().name;\r",
+							"    pm.expect(\"Nicholas Runolfsdottir V\").to.eql(name);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users/{{userId}}",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const user = {\r",
+							"    id: 0,\r",
+							"    name: \"Son Goku\",\r",
+							"    username: \"UltraInstinct\",\r",
+							"    email: \"goku@google.com\",\r",
+							"    address: {\r",
+							"        street: \"Ellsworth Summit\",\r",
+							"        suite: \"Suite 729\",\r",
+							"        city: \"Aliyaview\",\r",
+							"        zipcode: \"45169\",\r",
+							"        geo: {\r",
+							"            \"lat\": \"-14.3990\",\r",
+							"            \"lng\": \"-120.7677\"\r",
+							"        }\r",
+							"    },\r",
+							"    phone: \"586.493.6943 x140\",\r",
+							"    website: \"jacynthe.com\",\r",
+							"    company: {\r",
+							"        name: \"Abernathy Group\",\r",
+							"        catchPhrase: \"Implemented secondary concept\",\r",
+							"        bs: \"e-enable extensible e-tailers\"\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.globals.set(\"user\",JSON.stringify(user));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var user = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Name should be Son Goku\", function () {\r",
+							"    const name = user.name;\r",
+							"    pm.expect(\"Son Goku\").to.eql(name);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username should be UltraInstinct\", function () {\r",
+							"    const username = pm.response.json().username;\r",
+							"    pm.expect(\"UltraInstinct\").to.eql(username);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{user}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
